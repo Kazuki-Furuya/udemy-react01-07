@@ -13,9 +13,15 @@ export const App = (props) => {
 
   const onClickAdd = () => {
     if (todoText === "") return;
-    const newTodos = [...incompleteTodos, todoText];
-    setIncompleteTodos(newTodos);
-    setTodoText("");
+
+    // 未完了のTODOが５個以上の場合、追加できなくする
+    if (incompleteTodos.length >= 5) {
+      alert("未完了のタスクは最大５件です!");
+    } else {
+      const newTodos = [...incompleteTodos, todoText];
+      setIncompleteTodos(newTodos);
+      setTodoText("");
+    }
   };
 
   const onClickDelete = (index) => {
@@ -49,6 +55,7 @@ export const App = (props) => {
         todoText={todoText}
         onChange={onChangeTodoText}
         onClick={onClickAdd}
+        disabled={incompleteTodos.length >= 5}
       />
       <IncompleteTodos
         incompleteTodos={incompleteTodos}
