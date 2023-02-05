@@ -1,33 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles.css";
 
 export const App = () => {
+  const [incompleteTodos, setIncompleteTodos] = useState(["aaa", "bbb"]);
+  const [completeTodos, setCompleteTodos] = useState(["ccc"]);
+
   return (
     <>
-      <div>
+      <div className="input-area">
         <input placeholder="input TODO" />
         <button>add</button>
       </div>
-      <div>
-        <p>incompleted todo</p>
+      <div className="incomplete-area">
+        <p className="title">incompleted todo</p>
         <ul>
-          <div>
-            <li>aaa</li>
-            <button>complete</button>
-            <button>delete</button>
-          </div>
-          <div>
-            <li>bbb</li>
-            <button>complete</button>
-            <button>delete</button>
-          </div>
+          {incompleteTodos.map((todo) => {
+            return (
+              <div key={todo} className="list-row">
+                <li>{todo}</li>
+                <button>complete</button>
+                <button>delete</button>
+              </div>
+            );
+          })}
         </ul>
       </div>
-      <div>
-        <p>completed todo</p>
+      <div className="complete-area">
+        <p className="title">completed todo</p>
         <ul>
-          <li>ccc</li>
-          <button>back</button>
+          {completeTodos.map((todo) => {
+            return (
+              <div className="list-row">
+                <li>{todo}</li>
+                <button>back</button>
+              </div>
+            );
+          })}
         </ul>
       </div>
     </>
